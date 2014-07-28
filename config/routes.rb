@@ -4,7 +4,15 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'welcome#index'
-  resources :users, :only => [:index, :create, :show, :edit]
+  
+
+  # Versioning APIs
+  namespace :api, defaults: {format: 'json'} do
+    namespace :v1 do
+      resources :users, :only => [:index, :create, :show, :edit] 
+      
+    end
+  end
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
