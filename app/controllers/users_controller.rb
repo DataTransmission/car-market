@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
 
+	before_filter :fetch_user, :except => [:index, :create]
 	respond_to :json
 
 	def index
@@ -8,7 +9,6 @@ class UsersController < ApplicationController
 	end
 
 	def show
-		@user = User.find(params[:id])
 		render :json => @user.to_json
 	end
 
@@ -23,16 +23,10 @@ class UsersController < ApplicationController
 	end
 
 	def destroy
-		@user = User.find(params[:id])
 		@user.destroy
 	end
 
-	def edit
-		@user = User.find(params[:id])
-	end
-
 	def update
-		@user = User.find(params[:id])
 		if @user.update_attributes(params[:user])
 			render :json => 'Updating'.to_json
 		end
@@ -43,6 +37,11 @@ class UsersController < ApplicationController
 	def user_params
 		params
 		.permit(:first_name, :last_name, :nickname, :email, :password, :password_confirmation)
+	end
+
+	private
+	def fetch_user
+		@user = User.find_by_id(params[:id])
 	end
 
 end
