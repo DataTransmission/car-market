@@ -5,11 +5,15 @@ class Api::V1::UsersController < ApplicationController
 
 	def index
 		@users = User.all
-		render :json => @users.to_json
+		respond_to do |format|
+			format.json { render json: @users }
+		end
 	end
 
 	def show
-		render :json => @user.to_json
+		respond_to do |format|
+			format.json { render json: @user }
+		end
 	end
 
 	def create
