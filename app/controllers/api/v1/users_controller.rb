@@ -73,4 +73,10 @@ class Api::V1::UsersController < ApplicationController
 		@user = User.find_by_id(params[:id])
 	end
 
+	private
+	def api_authenticate
+		authenticate_or_request_with_http_token do |token, options|
+			ApiKey.exists?(access_token: token)
+		end
+	end
 end
