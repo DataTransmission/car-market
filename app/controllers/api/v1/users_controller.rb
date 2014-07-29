@@ -23,15 +23,27 @@ class Api::V1::UsersController < ApplicationController
 		end
 	end
 
-	def destroy
-		@user.destroy
-	end
-
 	def update
-		if @user.update_attributes(params[:user])
-			render :json => 'Updating'.to_json
+		respond_to do |format|
+			if @user.update_attributes(update_user_params)
+				format.json { head :no_content, status: :ok }
+			else
+				format.json { render json: @user.errors, status: :unprocessable_entity }
+			end
 		end
 	end
+
+	def destroy
+		respond_to do |format|
+			if @user.destroy
+				format.json { head :no_content, status: :ok }
+			else
+				format.json { render json: @user.errors, status: :unprocessable_entity }
+			end
+		end
+	end
+
+	
 
 
 	private
@@ -42,6 +54,14 @@ class Api::V1::UsersController < ApplicationController
 			:email, :status,
 			:password, :password_confirmation)
 	end
+
+	private
+	def update_user_params
+		params
+		.require(:user)
+		.permit(:first_name, :last_name, :nickname, 
+			:email, :status, 
+			:password, :password_confirmation)
 	end
 
 	private
