@@ -1,7 +1,7 @@
 class Api::V1::UsersController < ApplicationController
 
-	before_filter :fetch_user, :except => [:index, :create]
-	respond_to :json
+ 	before_filter :fetch_user, :except => [:index, :create]
+	before_action :api_authenticate, except: [:signin]
 
 	def index
 		@users = User.all
