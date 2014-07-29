@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class Api::V1::UsersController < ApplicationController
 
 	before_filter :fetch_user, :except => [:index, :create]
 	respond_to :json
