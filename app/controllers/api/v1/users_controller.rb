@@ -13,12 +13,13 @@ class Api::V1::UsersController < ApplicationController
 	end
 
 	def create
-	# render :json => 'Sign Up API is reached...'.to_json
-	@user = User.new(user_params)
-		if @user.save # Handle a successful save.
-			render :json => @user.to_json
-		else
-			render :json => params[:action].to_json
+		@user = User.new(create_user_params)
+		respond_to do |format|
+			if @user.save
+				format.json { render json: @user, status: :created }
+			else
+				format.json { render json: @user.errors, status: :unprocessable_entity }
+			end
 		end
 	end
 
@@ -34,9 +35,13 @@ class Api::V1::UsersController < ApplicationController
 
 
 	private
-	def user_params
+	def create_user_params
 		params
-		.permit(:first_name, :last_name, :nickname, :email, :password, :password_confirmation)
+		.require(:user)
+		.permit(:first_name, :last_name, :nickname, 
+			:email, :status,
+			:password, :password_confirmation)
+	end
 	end
 
 	private
