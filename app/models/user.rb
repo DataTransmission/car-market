@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+	after_create :create_api_key
 	has_secure_password
 
 	before_save { self.email = email.downcase }
@@ -15,4 +16,8 @@ class User < ActiveRecord::Base
 
 	validates :password, length: { minimum: 6 }, :on => :create
 
+	def create_api_key
+      ApiKey.create!(user: self)
+    end
+	
 end
