@@ -47,55 +47,91 @@ class Api::V1::UsersController < ApplicationController
 		end
 	end
 
+
 	def signin
-		token = ApiKey.create!
-		msg = { token: token.access_token }
-		respond_to do |format|
-			format.json { render json: msg }
+
+		if params[:user][:email] == nil
+			msg = {message: 'invalid email'}
+			return render :json => msg.to_json
 		end
-	end
 
-	def signout
-		authenticate_or_request_with_http_token do |token, options|
-			token = ApiKey.find_by(access_token: token)
-			if token != nil
-				token.destroy
-			end
+		if params[:user][:password] == nil
+			msg = {message: 'invalid password'}
+			return render :json => msg.to_json
 		end
-		msg = { status: "OK" }
-		respond_to do |format|
-			format.json { render json: msg }
-		end
-	end
 
 
-	private
-	def create_user_params
-		params
-		.require(:user)
-		.permit(:first_name, :last_name, :nickname, 
-			:email, :status,
-			:password, :password_confirmation)
-	end
+		@user = User.find_by(email: params[:user][:email].downcase)
 
-	private
-	def update_user_params
-		params
-		.require(:user)
-		.permit(:first_name, :last_name, :nickname, 
-			:email, :status, 
-			:password, :password_confirmation)
-	end
+		msg = Hash.new
 
-	private
-	def fetch_user
-		@user = User.find_by_id(params[:id])
-	end
+		if @user && @user.authenticate(params[:user][:password])
+    		# Sign the user in and redirect to the user's show page.
 
-	private
-	def api_authenticate
-		authenticate_or_request_with_http_token do |token, options|
-			ApiKey.exists?(access_token: token)
-		end
-	end
+    		token = ApiKey.find_by(user_id: @user.id)
+
+    		if token.present?
+    			msg[:condition] = 'used'	
+    		else
+    			token = ApiKey.create!(user_id: @user.id)
+    			msg[:condition] = 'new'
+    		end
+
+    		msg[:token] = token.access_token
+
+    	else
+    		# Create an error message and re-render the signin form.
+    		msg[:condition] = 'signin failed...'
+    	end
+
+
+    	respond_to do |format|
+    		format.json { render json: msg }
+    	end
+    end
+
+    def signout
+    	authenticate_or_request_with_http_token do |token, options|
+    		token = ApiKey.find_by(access_token: token)
+    		if token != nil
+    			token.destroy
+    		end
+    	end
+    	msg = { status: "OK" }
+    	respond_to do |format|
+    		format.json { render json: msg }
+    	end
+    end
+
+
+    private
+    def create_user_params
+    	params
+    	.require(:user)
+    	.permit(:first_name, :last_name, :nickname, 
+    		:email, :status,
+    		:password, :password_confirmation)
+    end
+
+    private
+    def update_user_params
+    	params
+    	.require(:user)
+    	.permit(:first_name, :last_name, :nickname, 
+    		:email, :status, 
+    		:password, :password_confirmation)
+    end
+
+    private
+    def fetch_user
+    	@user = User.find_by_id(params[:id])
+    end
+
+    private
+    def api_authenticate
+    	authenticate_or_request_with_http_token do |token, options|
+    		ApiKey.exists?(access_token: token)
+    	end
+    end
+
 end
