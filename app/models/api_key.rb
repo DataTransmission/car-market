@@ -1,4 +1,6 @@
 class ApiKey < ActiveRecord::Base
+
+	belongs_to :user
 	before_create :generate_access_token
 
 	validates :access_token, uniqueness: true
@@ -6,6 +8,7 @@ class ApiKey < ActiveRecord::Base
 
 	private
 	def generate_access_token
+
 		self.user_id = user_id
 		begin
 			self.access_token = SecureRandom.hex
