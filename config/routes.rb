@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   # Versioning APIs
   namespace :api, defaults: {format: 'json'} do
     namespace :v1 do
-      get 'users/signin' => 'users#signin'
+      post 'users/signin' => 'users#signin'
       get 'users/signout' => 'users#signout'
       resources :users, :only => [:index, :create, :show, :edit] 
       
