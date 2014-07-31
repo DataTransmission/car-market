@@ -18,16 +18,6 @@ class User < ActiveRecord::Base
 
 	validates :password, length: { minimum: 6 }, :on => :create
 
-
-	# private
-	# def set_auth_token
-	# 	return if auth_token.present?
-
-	# 	begin
-	# 		self.auth_token = SecureRandom.hex
-	# 	end while self.class.exists?(auth_token: self.auth_token)
-	# end
-
 	# Create getter and setter for class level User
 	# class << self; 
 	# 	attr_accessor :token_status 
@@ -36,16 +26,18 @@ class User < ActiveRecord::Base
 	# ===================================
 
 	# Create getter and setter for an instance of User
-	attr_accessor :token_status 
+	attr_accessor :token, :token_status, :vehicles
 
-	def get_or_create_api_key
-		token = ApiKey.find_by(user: self)
+	def token
+		@token = ApiKey.find_by(user_id: self.id)
+	end
+
+	def token_status
+		token = ApiKey.find_by(user_id: self.id)
 		if token.present?
-			@token_status = 'used'
-			return token	
+			@token_status = 'exist'
 		else
-			@token_status = 'new'
-			return create_api_key
+			@token_status = 'empty'
 		end
 	end
 
@@ -53,5 +45,4 @@ class User < ActiveRecord::Base
 	def create_api_key
 		return ApiKey.create!(user: self)
 	end
-
 end
