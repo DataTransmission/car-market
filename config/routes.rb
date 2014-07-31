@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       post 'users/signin' => 'users#signin'
       get 'users/signout' => 'users#signout'
-      resources :users, :only => [:index, :create, :show, :edit] 
+      resources :users, :only => [:index, :create, :show, :update] 
       
       
     end
