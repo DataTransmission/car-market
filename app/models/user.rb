@@ -46,6 +46,10 @@ class User < ActiveRecord::Base
 		end
 	end
 
+	def vehicles
+		@vehicle = Vehicle.where(:user_id => self.id).all
+	end
+
 	private
 	def create_api_key
 		return ApiKey.create!(user: self)
