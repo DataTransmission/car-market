@@ -69,16 +69,10 @@ class Api::V1::UsersController < ApplicationController
 		if @user && @user.authenticate(params[:user][:password])
     		# Sign the user in and redirect to the user's show page.
 
-    		token = ApiKey.find_by(user_id: @user.id)
-
-    		if token.present?
-    			msg[:condition] = 'used'	
-    		else
-    			token = ApiKey.create!(user_id: @user.id)
-    			msg[:condition] = 'new'
-    		end
+    		token = @user.get_or_create_api_key
 
     		msg[:token] = token.access_token
+    		msg[:condition] = @user.token_status.present? ? @user.token_status : 'expired'
 
     	else
     		# Create an error message and re-render the signin form.
