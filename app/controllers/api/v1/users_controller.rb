@@ -30,7 +30,8 @@ class Api::V1::UsersController < ApplicationController
 	def update
 		respond_to do |format|
 			if @user.update_attributes(update_user_params)
-				format.json { head :no_content, status: :ok }
+				msg = 'user info is updated'
+				format.json { render json: msg, status: :ok }
 			else
 				format.json { render json: @user.errors, status: :unprocessable_entity }
 			end
@@ -40,13 +41,13 @@ class Api::V1::UsersController < ApplicationController
 	def destroy
 		respond_to do |format|
 			if @user.destroy
-				format.json { head :no_content, status: :ok }
+				msg = 'user info is deleted'
+				format.json { render json: msg, status: :ok }
 			else
 				format.json { render json: @user.errors, status: :unprocessable_entity }
 			end
 		end
 	end
-
 
 	def signin
 
