@@ -23,3 +23,50 @@ for i in (1..3)
 			)
 	end
 end
+
+Vehicle.create!(
+	vin: '19XFA1E50BE000000',
+	manufacturer: 'Honda',
+	model: 'Civic',
+	year: '2011',
+	color: '',
+	user_id: 1
+	)
+Vehicle.create!(
+	vin: '19XFB2F51DE000000',
+	manufacturer: 'Honda',
+	model: 'Civic',
+	year: '2013',
+	color: '',
+	user_id: 1
+	)
+
+
+Vehicle.create!(
+	vin: '2HNYD2H20CH000000',
+	manufacturer: 'Acura',
+	model: 'MDX',
+	year: '2012',
+	color: '',
+	user_id: 1
+	)
+
+Vehicle.create!(
+	vin: '2HNYD2H23CH000000',
+	manufacturer: 'Acura',
+	model: 'MDX',
+	year: '2012',
+	color: '',
+	user_id: 1
+	)
+
+Vehicle.create!(
+	vin: '2G1SCHED4C9000000',
+	manufacturer: 'Chevrolet',
+	model: 'Suburban',
+	year: '2012',
+	color: '',
+	user_id: 1
+	)
+
+
