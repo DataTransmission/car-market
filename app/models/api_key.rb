@@ -1,15 +1,16 @@
 class ApiKey < ActiveRecord::Base
 
 	belongs_to :user
+	has_one :user_id
+	
 	before_create :generate_access_token
 
 	validates :access_token, uniqueness: true
-	validates :user_id, uniqueness: true
+	# validates :user_id, uniqueness: true
 
 	private
 	def generate_access_token
-
-		self.user_id = user_id
+		self.user_id = user.id
 		begin
 			self.access_token = SecureRandom.hex
 		end while self.class.exists?(access_token: access_token)
