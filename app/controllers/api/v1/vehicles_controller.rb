@@ -3,9 +3,9 @@ class Api::V1::VehiclesController < ApplicationController
 	before_filter :fetch_vehicle, :except => [:index, :create]
 
 	def index
-		@vehicle = Vehicle.all
+		@vehicles = Vehicle.all
 		respond_to do |format|
-			format.json { render json: @vehicle }
+			format.json { render json: @vehicles }
 		end
 	end
 
