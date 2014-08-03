@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
 	has_one :api_key, dependent: :destroy
 	has_many :vehicle
 	has_many :photo
+	has_many :listing
 
 	after_create :create_api_key
 
