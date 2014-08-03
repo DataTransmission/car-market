@@ -1,6 +1,8 @@
 class Photo < ActiveRecord::Base
 	has_one :user
 	has_one :vehicle
+	belongs_to :user
+	belongs_to :vehicle
 	attr_accessor :user, :vehicle
 
 	def user
@@ -8,6 +10,6 @@ class Photo < ActiveRecord::Base
 	end
 
 	def vehicle
-		@vehicle = User.find_by_id(self.vehicle_id)
+		@vehicle = Vehicle.find_by_id(self.vehicle_id)
 	end
 end
