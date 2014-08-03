@@ -49,11 +49,11 @@ class User < ActiveRecord::Base
 	end
 
 	def vehicles
-		@vehicle = Vehicle.where(:user_id => self.id).all
+		@vehicles = Vehicle.where(:user_id => self.id).all
 	end
 
 	def photos
-		@vehicle = Photo.where(:user_id => self.id).all
+		@photos = Photo.where(:user_id => self.id).all
 	end
 
 	def listings
