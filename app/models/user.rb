@@ -33,7 +33,7 @@ class User < ActiveRecord::Base
 	# ===================================
 
 	# Create getter and setter for an instance of User
-	attr_accessor :token, :token_status, :vehicles, :photos
+	attr_accessor :token, :token_status, :vehicles, :photos, :listings
 
 	def token
 		@token = ApiKey.find_by(user_id: self.id)
@@ -54,6 +54,10 @@ class User < ActiveRecord::Base
 
 	def photos
 		@vehicle = Photo.where(:user_id => self.id).all
+	end
+
+	def listings
+		@listings = Listing.where(:user_id => self.id).all
 	end
 
 	private
