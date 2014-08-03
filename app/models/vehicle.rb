@@ -1,5 +1,6 @@
 class Vehicle < ActiveRecord::Base
 	has_one :user
+	has_one :listing
 	has_many :photo
 	attr_accessor :user 
 
