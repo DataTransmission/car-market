@@ -15,6 +15,6 @@ class Vehicle < ActiveRecord::Base
 	end
 
 	def listing
-		@listings = Listing.find_by_vehicle_id(self.id)
+		@listing = Listing.find_by_vehicle_id(self.id)
 	end
 end
