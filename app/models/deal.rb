@@ -1,4 +1,7 @@
 class Deal < ActiveRecord::Base
+
+	belongs_to :listing
+
 	attr_accessor :user, :listing
 
 	def user

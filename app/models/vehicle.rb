@@ -1,8 +1,9 @@
 class Vehicle < ActiveRecord::Base
-	has_one :user
+
 	has_one :listing, dependent: :destroy
 	has_many :photo
 	belongs_to :user
+
 	attr_accessor :user, :photos, :listing
 
 	def user
