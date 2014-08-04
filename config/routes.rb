@@ -14,6 +14,7 @@ Rails.application.routes.draw do
       resources :users, :only => [:index, :create, :show, :update]
       resources :vehicles, :only => [:index, :create, :show, :update]
       resources :photos, :only => [:index, :create, :show, :update]
+      resources :listings, :only => [:index, :create, :show, :update]
       
     end
   end
