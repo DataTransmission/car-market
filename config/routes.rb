@@ -13,7 +13,7 @@ Rails.application.routes.draw do
       get 'users/signout' => 'users#signout'
       resources :users, :only => [:index, :create, :show, :update]
       resources :vehicles, :only => [:index, :create, :show, :update]
-      
+      resources :photos, :only => [:index, :create, :show, :update]
       
     end
   end

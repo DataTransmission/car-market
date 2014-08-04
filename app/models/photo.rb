@@ -1,6 +1,4 @@
 class Photo < ActiveRecord::Base
-	has_one :user
-	has_one :vehicle
 	belongs_to :user
 	belongs_to :vehicle
 	attr_accessor :user, :vehicle
