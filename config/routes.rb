@@ -15,6 +15,7 @@ Rails.application.routes.draw do
       resources :vehicles, :only => [:index, :create, :show, :update]
       resources :photos, :only => [:index, :create, :show, :update]
       resources :listings, :only => [:index, :create, :show, :update]
+      resources :deals, :only => [:index, :create, :show, :update]
       
     end
   end
