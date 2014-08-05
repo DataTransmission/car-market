@@ -36,11 +36,11 @@ class User < ActiveRecord::Base
 	attr_accessor :token, :token_status, :vehicles, :photos, :listings
 
 	def token
-		@token = ApiKey.find_by(user_id: self.id)
+		@token = ApiKey.find_by_user_id(self.id)
 	end
 
 	def token_status
-		token = ApiKey.find_by(user_id: self.id)
+		token = ApiKey.find_by_user_id(self.id)
 		if token.present?
 			@token_status = 'exist'
 		else
