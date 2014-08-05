@@ -69,4 +69,60 @@ Vehicle.create!(
 	user_id: 1
 	)
 
+Listing.create!(
+	user_id: 1,
+	vehicle_id: 1,
+	price: '7000',
+	currency: 'USD',
+	status: 'active',
+	city: 'San Jose',
+	state: 'California',
+	country: 'United States',
+	zip_code: '',
+	description: 'used car, but in good status'
+	)
+
+Listing.create!(
+	user_id: 1,
+	vehicle_id: 2,
+	price: '13000',
+	currency: 'USD',
+	status: 'active',
+	city: 'San Jose',
+	state: 'California',
+	country: 'United States',
+	zip_code: '',
+	description: 'like new, rarely use'
+	)
+
+Listing.create!(
+	user_id: 2,
+	vehicle_id: 3,
+	price: '3500',
+	currency: 'USD',
+	status: 'active',
+	city: 'San Francisco',
+	state: 'California',
+	country: 'United States',
+	zip_code: '',
+	description: 'a bit old, but can still serve you well'
+	)
+
+Listing.create!(
+	user_id: 4,
+	vehicle_id: 4,
+	price: '5000',
+	currency: 'USD',
+	status: 'active',
+	city: 'San Francisco',
+	state: 'California',
+	country: 'United States',
+	zip_code: '',
+	description: 'fairly good'
+	)
+
+
+
+
+
 
