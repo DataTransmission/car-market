@@ -40,11 +40,16 @@ class User < ActiveRecord::Base
 	end
 
 	def token_status
-		token = ApiKey.find_by_user_id(self.id)
-		if token.present?
+		
+		if @token.present?
 			@token_status = 'exist'
 		else
-			@token_status = 'empty'
+			@token = ApiKey.find_by_user_id(self.id)
+			if @token.present?
+				@token_status = 'exist'
+			else 
+				@token_status = 'empty'
+			end
 		end
 	end
 
