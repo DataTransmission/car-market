@@ -66,15 +66,13 @@ class Api::V1::UsersController < ApplicationController
 
 		msg = Hash.new
 
-		if @user && @user.authenticate(params[:user][:password])
-    		# Sign the user in and redirect to the user's show page.
-
+		if @user == nil
+			msg[:condition] = 'Please sign up first...'
+		elsif !@user.authenticate(params[:user][:password])
+			msg[:condition] = 'Wrong password...'
+		else
     		msg[:token] = @user.token.access_token
     		msg[:condition] = @user.token_status
-
-    	else
-    		# Create an error message and re-render the signin form.
-    		msg[:condition] = 'signin failed...'
     	end
 
 
