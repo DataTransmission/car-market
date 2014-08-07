@@ -7,16 +7,31 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 
-for i in (1..3)
-	@user = User.where(email: 'fln#{i}@gmail.com').first
-	if @user && @user.status.blank?
-		@user.update_attributes(status: 'active')
-	else
+first_names = [
+	'Adam', 'Bob', 'Carol','David',	'Eddie','Frank','George','Harry',
+	'Ike','Jim','Kenny','Larry', 'Mary','Nancy','Oliver','Peter',
+	'Quincy','Roger','Sam','Thomas', 'Victor','Vincent','William',
+	'Joseph', 'David', 'Michael', 'Jacob', 'Moshe', 'Daniel', 'Alex', 'Benjamin',
+	'Samuel', 'James', 'Emma', 'Leah', 'Sarah', 'Olivia', 'Sophia',	'Esther',
+	'Rachel', 'Chaya', 'Ava', 'Chana', 'Miriam'
+]
+
+
+number_of_users = 50
+for i in (1..number_of_users)
+
+	fname = first_names.shuffle[0,1].join
+	lname = (:A..:Z).to_a.shuffle[0,1].join + (:a..:z).to_a.shuffle[0,5].join;
+	digit = Random.new.rand(0..99)
+	email = "#{fname}.#{lname}.#{digit}@gmail.com"
+
+	@user = User.where(email: email).first
+	if @user == nil
 		User.create!(
-			first_name:"fname#{i}",
-			last_name:"lname#{i}", 
-			nickname:"nname#{i}", 
-			email: "fln#{i}@gmail.com", 
+			first_name: fname,
+			last_name: lname, 
+			nickname: "#{lname}.#{digit}", 
+			email: email, 
 			password: "000000", 
 			password_confirmation: "000000",
 			status: 'active'
@@ -24,102 +39,106 @@ for i in (1..3)
 	end
 end
 
-Vehicle.create!(
-	vin: '19XFA1E50BE000000',
-	manufacturer: 'Honda',
-	model: 'Civic',
-	year: '2011',
-	color: '',
-	user_id: 1
-	)
-Vehicle.create!(
-	vin: '19XFB2F51DE000000',
-	manufacturer: 'Honda',
-	model: 'Civic',
-	year: '2013',
-	color: '',
-	user_id: 1
-	)
+for i in (0..9)
+	Vehicle.create!(
+		vin: '19XFA1E50BE00000#{i}',
+		manufacturer: 'Honda',
+		model: 'Civic',
+		year: '2011',
+		color: '',
+		user_id: (1..number_of_users).to_a.shuffle[0,1].join
+		)
+	Vehicle.create!(
+		vin: '19XFB2F51DE00000#{i}',
+		manufacturer: 'Honda',
+		model: 'Civic',
+		year: '2013',
+		color: '',
+		user_id: (1..number_of_users).to_a.shuffle[0,1].join
+		)
+
+	Vehicle.create!(
+		vin: '2HNYD2H20CH00000#{i}',
+		manufacturer: 'Acura',
+		model: 'MDX',
+		year: '2012',
+		color: '',
+		user_id: (1..number_of_users).to_a.shuffle[0,1].join
+		)
+
+	Vehicle.create!(
+		vin: '2HNYD2H23CH00000#{i}',
+		manufacturer: 'Acura',
+		model: 'MDX',
+		year: '2012',
+		color: '',
+		user_id: (1..number_of_users).to_a.shuffle[0,1].join
+		)
+
+	Vehicle.create!(
+		vin: '2G1SCHED4C900000#{i}',
+		manufacturer: 'Chevrolet',
+		model: 'Suburban',
+		year: '2012',
+		color: '',
+		user_id: (1..number_of_users).to_a.shuffle[0,1].join
+		)
+end
 
 
-Vehicle.create!(
-	vin: '2HNYD2H20CH000000',
-	manufacturer: 'Acura',
-	model: 'MDX',
-	year: '2012',
-	color: '',
-	user_id: 1
-	)
 
-Vehicle.create!(
-	vin: '2HNYD2H23CH000000',
-	manufacturer: 'Acura',
-	model: 'MDX',
-	year: '2012',
-	color: '',
-	user_id: 1
-	)
 
-Vehicle.create!(
-	vin: '2G1SCHED4C9000000',
-	manufacturer: 'Chevrolet',
-	model: 'Suburban',
-	year: '2012',
-	color: '',
-	user_id: 1
-	)
+# Listing.create!(
+# 	user_id: 1,
+# 	vehicle_id: 1,
+# 	price: '7000',
+# 	currency: 'USD',
+# 	status: 'active',
+# 	city: 'San Jose',
+# 	state: 'California',
+# 	country: 'United States',
+# 	zip_code: '',
+# 	description: 'used car, but in good status'
+# 	)
 
-Listing.create!(
-	user_id: 1,
-	vehicle_id: 1,
-	price: '7000',
-	currency: 'USD',
-	status: 'active',
-	city: 'San Jose',
-	state: 'California',
-	country: 'United States',
-	zip_code: '',
-	description: 'used car, but in good status'
-	)
+# Listing.create!(
+# 	user_id: 1,
+# 	vehicle_id: 2,
+# 	price: '13000',
+# 	currency: 'USD',
+# 	status: 'active',
+# 	city: 'San Jose',
+# 	state: 'California',
+# 	country: 'United States',
+# 	zip_code: '',
+# 	description: 'like new, rarely use'
+# 	)
 
-Listing.create!(
-	user_id: 1,
-	vehicle_id: 2,
-	price: '13000',
-	currency: 'USD',
-	status: 'active',
-	city: 'San Jose',
-	state: 'California',
-	country: 'United States',
-	zip_code: '',
-	description: 'like new, rarely use'
-	)
+# Listing.create!(
+# 	user_id: 2,
+# 	vehicle_id: 3,
+# 	price: '3500',
+# 	currency: 'USD',
+# 	status: 'active',
+# 	city: 'San Francisco',
+# 	state: 'California',
+# 	country: 'United States',
+# 	zip_code: '',
+# 	description: 'a bit old, but can still serve you well'
+# 	)
 
-Listing.create!(
-	user_id: 2,
-	vehicle_id: 3,
-	price: '3500',
-	currency: 'USD',
-	status: 'active',
-	city: 'San Francisco',
-	state: 'California',
-	country: 'United States',
-	zip_code: '',
-	description: 'a bit old, but can still serve you well'
-	)
-
-Listing.create!(
-	user_id: 4,
-	vehicle_id: 4,
-	price: '5000',
-	currency: 'USD',
-	status: 'active',
-	city: 'San Francisco',
-	state: 'California',
-	country: 'United States',
-	zip_code: '',
-	description: 'fairly good'
-	)
+# Listing.create!(
+# 	user_id: 4,
+# 	vehicle_id: 4,
+# 	price: '5000',
+# 	currency: 'USD',
+# 	status: 'active',
+# 	city: 'San Francisco',
+# 	state: 'California',
+# 	country: 'United States',
+# 	zip_code: '',
+# 	description: 'fairly good'
+# 	)
 
 
 
