@@ -5,21 +5,24 @@
 #   gem 'sqlite3'
 #
 default: &default
-pool: 5
-timeout: 5000
+  adapter: sqlite3
+  pool: 5
+  timeout: 5000
 
 development:
-<<: *default
-sqlite3: car_market_development
+  <<: *default
+  database: db/development.sqlite3
+  # sqlite3: car_market_development
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
-<<: *default
-sqlite3: car_market_test
+  <<: *default
+  database: db/test.sqlite3
+  # sqlite3: car_market_test
 
 production:
-<<: *default
-adapter: postgresql
-database: car_market_production
+  <<: *default
+  database: db/production.sqlite3
+  # sqlite3: car_market_production
