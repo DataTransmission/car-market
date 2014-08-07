@@ -3,12 +3,13 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'welcome#index'
+  root 'vehicles#index'
   
 
   # Versioning APIs
   namespace :api, defaults: {format: 'json'} do
     namespace :v1 do
+      get '/' => 'vehicles#index'
       post 'users/signin' => 'users#signin'
       get 'users/signout' => 'users#signout'
       resources :users, :only => [:index, :create, :show, :update]
