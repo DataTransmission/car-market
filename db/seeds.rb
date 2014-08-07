@@ -29,10 +29,10 @@ for i in (1..number_of_users)
 	if @user == nil
 		User.create!(
 			first_name: fname,
-			last_name: lname, 
-			nickname: "#{lname}.#{digit}", 
-			email: email, 
-			password: "000000", 
+			last_name: lname,
+			nickname: "#{lname}.#{digit}",
+			email: email,
+			password: "000000",
 			password_confirmation: "000000",
 			status: 'active'
 			)
@@ -41,7 +41,7 @@ end
 
 for i in (0..9)
 	Vehicle.create!(
-		vin: '19XFA1E50BE00000#{i}',
+		vin: "19XFA1E50BE00000#{i}",
 		manufacturer: 'Honda',
 		model: 'Civic',
 		year: '2011',
@@ -49,7 +49,7 @@ for i in (0..9)
 		user_id: (1..number_of_users).to_a.shuffle[0,1].join
 		)
 	Vehicle.create!(
-		vin: '19XFB2F51DE00000#{i}',
+		vin: "19XFB2F51DE00000#{i}",
 		manufacturer: 'Honda',
 		model: 'Civic',
 		year: '2013',
@@ -58,7 +58,7 @@ for i in (0..9)
 		)
 
 	Vehicle.create!(
-		vin: '2HNYD2H20CH00000#{i}',
+		vin: "2HNYD2H20CH00000#{i}",
 		manufacturer: 'Acura',
 		model: 'MDX',
 		year: '2012',
@@ -67,7 +67,7 @@ for i in (0..9)
 		)
 
 	Vehicle.create!(
-		vin: '2HNYD2H23CH00000#{i}',
+		vin: "2HNYD2H23CH00000#{i}",
 		manufacturer: 'Acura',
 		model: 'MDX',
 		year: '2012',
@@ -76,7 +76,7 @@ for i in (0..9)
 		)
 
 	Vehicle.create!(
-		vin: '2G1SCHED4C900000#{i}',
+		vin: "2G1SCHED4C900000#{i}",
 		manufacturer: 'Chevrolet',
 		model: 'Suburban',
 		year: '2012',
@@ -139,9 +139,3 @@ end
 # 	zip_code: '',
 # 	description: 'fairly good'
 # 	)
-
-
-
-
-
-
