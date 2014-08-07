@@ -5,13 +5,14 @@ class Api::V1::PhotosController < ApplicationController
   def index
     @photos = Photo.all
     respond_to do |format|
-     format.json { render json: @photos }
-   end
- end
+      format.json { render json: @photos }
+    end
+  end
 
- def show
-  respond_to do |format|
-    format.json { render json: @photo }
+  def show
+    respond_to do |format|
+      format.json { render json: @photo }
+    end
   end
 
   def create
