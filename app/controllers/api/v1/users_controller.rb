@@ -121,7 +121,11 @@ class Api::V1::UsersController < ApplicationController
     private
     def api_authenticate
     	authenticate_or_request_with_http_token do |token, options|
-    		ApiKey.exists?(access_token: token)
+    		if ApiKey.exists?(access_token: token)
+              ApiKey.find_by_access_token(token).user_id == params[:id].to_i
+            else
+              false
+            end
     	end
     end
 
