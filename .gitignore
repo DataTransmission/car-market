@@ -40,3 +40,6 @@ build/
 ## Environment normalisation:
 /.bundle/
 /lib/bundler/man/
+
+## RubyMine and IntelliJ configurations:
+.idea
