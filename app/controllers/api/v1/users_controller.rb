@@ -1,6 +1,6 @@
 class Api::V1::UsersController < ApplicationController
 
- 	before_filter :fetch_user, :except => [:index, :create]
+	before_filter :fetch_user, :except => [:index, :create]
 	before_action :api_authenticate, except: [:signin, :create]
 
 	def index
@@ -51,82 +51,88 @@ class Api::V1::UsersController < ApplicationController
 
 	def signin
 
+    msg = Hash.new
+
 		if params[:user][:email] == nil
-			msg = {message: 'invalid email'}
+      msg[:status] = 400
+	    msg[:message] = 'invalid email'
 			return render :json => msg.to_json
 		end
 
 		if params[:user][:password] == nil
-			msg = {message: 'invalid password'}
+      msg[:status] = 400
+			msg[:message] = 'invalid password'
 			return render :json => msg.to_json
 		end
 
-
-		@user = User.find_by(email: params[:user][:email].downcase)
-
-		msg = Hash.new
+		@user = User.find_by_email(params[:user][:email].downcase)
 
 		if @user == nil
-			msg[:condition] = 'Please sign up first...'
+			msg[:message] = 'Please sign up first...'
+			msg[:status] = 401
 		elsif !@user.authenticate(params[:user][:password])
-			msg[:condition] = 'Wrong password...'
+			msg[:message] = 'Wrong password...'
+			msg[:status] = 401
 		else
-    		msg[:token] = @user.token.access_token
-    		msg[:condition] = @user.token_status
-    	end
+			msg[:token] = @user.token.access_token
+			msg[:status] = 200
+			msg[:message] = 'OK'
+		end
 
 
-    	respond_to do |format|
-    		format.json { render json: msg }
-    	end
-    end
+		respond_to do |format|
+			format.json { render json: msg }
+		end
+	end
 
-    def signout
-    	authenticate_or_request_with_http_token do |token, options|
-    		token = ApiKey.find_by(access_token: token)
-    		if token != nil
-    			token.destroy
-    		end
-    	end
-    	msg = { status: "OK" }
-    	respond_to do |format|
-    		format.json { render json: msg }
-    	end
-    end
+	def signout
+		authenticate_or_request_with_http_token do |token, options|
+			token = ApiKey.find_by_access_token(token)
+			if token != nil
+				token.destroy
+			end
+		end
+		msg = Hash.new
+		msg[:status] = 200
+		msg[:message] = 'OK'
+		respond_to do |format|
+			format.json { render json: msg }
+		end
+	end
 
 
-    private
-    def create_user_params
-    	params
-    	.require(:user)
-    	.permit(:first_name, :last_name, :nickname, 
-    		:email, :status,
-    		:password, :password_confirmation)
-    end
+	private
+	def create_user_params
+		params
+		.require(:user)
+		.permit(:first_name, :last_name, :nickname,
+			:email, :status,
+			:password, :password_confirmation)
+	end
 
-    private
-    def update_user_params
-    	params
-    	.require(:user)
-    	.permit(:first_name, :last_name, :nickname, 
-    		:email, :status, 
-    		:password, :password_confirmation)
-    end
+	private
+	def update_user_params
+		params
+		.require(:user)
+		.permit(:first_name, :last_name, :nickname,
+			:email, :status,
+			:password, :password_confirmation)
+	end
 
-    private
-    def fetch_user
-    	@user = User.find_by_id(params[:id])
-    end
+	private
+	def fetch_user
+		@user = User.find_by_id(params[:id])
+	end
 
-    private
-    def api_authenticate
-    	authenticate_or_request_with_http_token do |token, options|
-    		if ApiKey.exists?(access_token: token)
-              ApiKey.find_by_access_token(token).user_id == params[:id].to_i
-            else
-              false
-            end
-    	end
-    end
+	private
+	def api_authenticate
+		authenticate_or_request_with_http_token do |token, options|
+			if ApiKey.exists?(access_token: token)
+				ApiKey.find_by_access_token(token).user_id == params[:id].to_i
+			else
+				false
+			end
+		end
+	end
 
 end
