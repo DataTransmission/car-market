@@ -33,25 +33,30 @@ class User < ActiveRecord::Base
 	# ===================================
 
 	# Create getter and setter for an instance of User
-	attr_accessor :token, :token_status, :vehicles, :photos, :listings
+	attr_accessor :token, :vehicles, :photos, :listings #, :token_status
 
 	def token
 		@token = ApiKey.find_by_user_id(self.id)
-	end
-
-	def token_status
-		
-		if @token.present?
-			@token_status = 'exist'
+		if @token == nil
+				return ApiKey.create!(user: self)
 		else
-			@token = ApiKey.find_by_user_id(self.id)
-			if @token.present?
-				@token_status = 'exist'
-			else 
-				@token_status = 'empty'
-			end
+				return @token
 		end
 	end
+
+	# def token_status
+	#
+	# 	if @token.present?
+	# 		@token_status = 'exist'
+	# 	else
+	# 		@token = ApiKey.find_by_user_id(self.id)
+	# 		if @token.present?
+	# 			@token_status = 'exist'
+	# 		else
+	# 			@token_status = 'empty'
+	# 		end
+	# 	end
+	# end
 
 	def vehicles
 		@vehicles = Vehicle.where(:user_id => self.id).all
