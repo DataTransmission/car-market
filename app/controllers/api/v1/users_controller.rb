@@ -101,6 +101,22 @@ class Api::V1::UsersController < ApplicationController
 		end
 	end
 
+	def verification
+		msg = Hash.new
+
+		token = ApiKey.find_by(token_verification)
+		if token != nil
+			msg[:is_active] = true
+		else
+			msg[:is_active] = false
+		end
+
+		respond_to do |format|
+			format.json { render json: msg }
+		end
+	end
+
+
 	private
 	def token_verification
 		params.require(:user).permit(:access_token)
