@@ -101,6 +101,10 @@ class Api::V1::UsersController < ApplicationController
 		end
 	end
 
+	private
+	def token_verification
+		params.require(:user).permit(:access_token)
+	end
 
 	private
 	def create_user_params
