@@ -1,7 +1,7 @@
 class Api::V1::UsersController < ApplicationController
 
 	before_filter :fetch_user, :except => [:index, :create]
-	before_action :api_authenticate, :except => [:signin, :create]
+	before_action :api_authenticate, :except => [:signin, :verification, :create]
 
 	def index
 		@users = User.all
