@@ -1,7 +1,7 @@
 class Api::V1::UsersController < ApplicationController
 
 	before_filter :fetch_user, :except => [:index, :create]
-	before_action :api_authenticate, except: [:signin, :create]
+	before_action :api_authenticate, :except => [:signin, :create]
 
 	def index
 		@users = User.all
@@ -75,6 +75,7 @@ class Api::V1::UsersController < ApplicationController
 			msg[:status] = 401
 		else
 			msg[:token] = @user.token.access_token
+			msg[:user_id] = @user.id
 			msg[:status] = 200
 			msg[:message] = 'OK'
 		end
