@@ -17,14 +17,37 @@ class Api::V1::UsersController < ApplicationController
 	end
 
 	def create
+
+		msg = Hash.new
+
 		@user = User.new(create_user_params)
-		respond_to do |format|
+
 			if @user.save
-				format.json { render json: @user, status: :created }
+				msg[:token] = @user.token.access_token
+				msg[:user_id] = @user.id
+				msg[:status] = 200
+				msg[:message] = ''
+				# format.json { render json: msg, status: :created }
 			else
-				format.json { render json: @user.errors, status: :unprocessable_entity }
+
+				str = ""
+				errors = @user.errors
+				for key in errors
+						for error in errors[key]
+							str += "#{key} #{error}" + "\n"
+						end
+				end
+
+				msg[:status] = 422
+				msg[:message] = str[0..-2]
+
+				#format.json { render json: @user.errors, status: :unprocessable_entity }
 			end
-		end
+
+
+			respond_to do |format|
+				format.json { render json: msg }
+			end
 	end
 
 	def update
@@ -77,7 +100,7 @@ class Api::V1::UsersController < ApplicationController
 			msg[:token] = @user.token.access_token
 			msg[:user_id] = @user.id
 			msg[:status] = 200
-			msg[:message] = 'OK'
+			msg[:message] = ''
 		end
 
 
