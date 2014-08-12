@@ -3,7 +3,7 @@ class Api::V1::VehiclesController < ApplicationController
 	before_filter :fetch_vehicle, :except => [:index, :create]
 
 	def index
-		@vehicles = Vehicle.all
+		@vehicles = Vehicle.offset(rand(Vehicle.count)).limit(5)
 		respond_to do |format|
 			format.json { render json: @vehicles }
 		end
