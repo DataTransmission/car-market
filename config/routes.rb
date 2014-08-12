@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: {format: 'json'} do
     namespace :v1 do
       get '/' => 'vehicles#index'
+      post 'users/verification' => 'users#verification'
       post 'users/signin' => 'users#signin'
       get 'users/signout' => 'users#signout'
       resources :users, :only => [:index, :create, :show, :update]
