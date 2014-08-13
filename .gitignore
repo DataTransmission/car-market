@@ -43,3 +43,6 @@ build/
 
 ## RubyMine and IntelliJ configurations:
 .idea
+
+## Auto-generated Ruby files:
+/db/schema.rb
