@@ -91,6 +91,30 @@ for i in (0..9)
 	)
 end
 
+cities = ["San Francisco", "San Jose", "Los Angeles"]
+descriptions = [
+	"used car, but in good status",
+	"used, in good shape",
+	"a bit old, but keep it in good condition",
+	"still looks like new",
+	"it works fine"
+]
+
+
+for vehicle in Vehicle.all()
+	Listing.create!(
+		user_id: vehicle.user_id,
+		vehicle_id: vehicle.id,
+		price: Random.new.rand(1000..15000).to_s,
+		currency: 'USD',
+		status: 'active',
+		city: cities.shuffle[0,1].join,
+		state: 'California',
+		country: 'United States',
+		zip_code: "94#{Random.new.rand(100..999)}",
+		description: descriptions.shuffle[0,1].join
+		)
+end
 
 
 
