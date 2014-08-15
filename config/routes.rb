@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'vehicles#index'
-  
+
 
   # Versioning APIs
   namespace :api, defaults: {format: 'json'} do
@@ -13,12 +13,13 @@ Rails.application.routes.draw do
       post 'users/verification' => 'users#verification'
       post 'users/signin' => 'users#signin'
       get 'users/signout' => 'users#signout'
+      get 'users/:id/vehicles' => 'users#show_vehicles'
       resources :users, :only => [:index, :create, :show, :update]
       resources :vehicles, :only => [:index, :create, :show, :update]
       resources :photos, :only => [:index, :create, :show, :update]
       resources :listings, :only => [:index, :create, :show, :update]
       resources :deals, :only => [:index, :create, :show, :update]
-      
+
     end
   end
   # Example of regular route:
