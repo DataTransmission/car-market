@@ -16,6 +16,12 @@ class Api::V1::UsersController < ApplicationController
 		end
 	end
 
+	def show_vehicles
+		respond_to do |format|
+			format.json { render json: @user.vehicles }
+		end
+	end
+
 	def create
 
 		msg = Hash.new
