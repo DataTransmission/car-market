@@ -3,7 +3,7 @@ class Api::V1::ListingsController < ApplicationController
   before_filter :fetch_listing, :except => [:index, :create]
 
 	def index
-		@listings = Listing.all
+    @listings = Listing.offset(rand(Listing.count)).limit(5)
 		respond_to do |format|
 			format.json { render json: @listings }
 		end
