@@ -29,6 +29,7 @@ class Api::V1::ListingsController < ApplicationController
   private
   def filter_listing(listing)
     hash = Hash.new()
+    hash[:id] = listing.id
     hash[:price] = listing.price
     hash[:currency] = listing.currency
     hash[:status] = listing.status
