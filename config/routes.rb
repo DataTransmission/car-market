@@ -14,6 +14,7 @@ Rails.application.routes.draw do
       post 'users/signin' => 'users#signin'
       get 'users/signout' => 'users#signout'
       get 'users/:id/vehicles' => 'users#show_vehicles'
+      get 'vehicles/:id/listing' => 'vehicles#show_listing'
       resources :users, :only => [:index, :create, :show, :update]
       resources :vehicles, :only => [:index, :create, :show, :update]
       resources :photos, :only => [:index, :create, :show, :update]
