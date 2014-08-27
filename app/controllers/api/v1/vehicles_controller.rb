@@ -15,6 +15,12 @@ class Api::V1::VehiclesController < ApplicationController
 		end
 	end
 
+	def show_listing
+		respond_to do |format|
+			format.json { render json: @vehicle.listing }
+		end
+	end
+
 	private
     def fetch_vehicle
     	@vehicle = Vehicle.find_by_id(params[:id])
