@@ -3,7 +3,10 @@ class Api::V1::ListingsController < ApplicationController
   before_filter :fetch_listing, :except => [:index, :create]
 
   def index
-    @listings = Listing.offset(rand(Listing.count)).limit(5)
+    total = Listing.count
+    total = total - 10 > 0 ? total - 10 : total
+
+    @listings = Listing.offset(rand(total)).limit(5)
 
     result = Array.new()
     for listing in @listings
