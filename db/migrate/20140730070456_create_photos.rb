@@ -1,8 +1,8 @@
 class CreatePhotos < ActiveRecord::Migration
   def change
     create_table :photos do |t|
-      t.integer :vehicle_id
-      t.integer :user_id
+      t.belongs_to :vehicle
+      t.belongs_to :user
       t.string :url
 
       t.timestamps

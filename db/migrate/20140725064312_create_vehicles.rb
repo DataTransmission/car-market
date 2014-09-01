@@ -6,8 +6,7 @@ class CreateVehicles < ActiveRecord::Migration
       t.string :model
       t.string :year
       t.string :color
-      t.integer :user_id
-      t.integer :photo_id
+      t.belongs_to :user
 
       t.timestamps
     end

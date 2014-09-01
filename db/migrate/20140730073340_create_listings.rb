@@ -1,8 +1,8 @@
 class CreateListings < ActiveRecord::Migration
   def change
     create_table :listings do |t|
-      t.integer :user_id
-      t.integer :vehicle_id
+      t.belongs_to :user
+      t.belongs_to :vehicle
       t.string :price
       t.string :currency
       t.string :status
