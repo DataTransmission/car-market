@@ -4,4 +4,7 @@ class Vehicle < ActiveRecord::Base
 	has_many :photos
 	belongs_to :user
 
+	validates(:vin, uniqueness: { case_sensitive: false })
+	validates(:user_id, presence: true)
+
 end
