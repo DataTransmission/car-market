@@ -52,15 +52,15 @@ class Api::V1::VehiclesController < ApplicationController
 	end
 
 	private
-    def fetch_vehicle
-    	@vehicle = Vehicle.find_by_id(params[:id])
-    end
+	def fetch_vehicle
+		@vehicle = Vehicle.find_by_id(params[:id])
+	end
 
 	private
-		def create_vehicle_params
-			params
-			.require(:vehicle)
-			.permit(:vin, :manufacturer, :model,
-			:year, :color, :user_id)
-		end
+	def create_vehicle_params
+		params
+		.require(:vehicle)
+		.permit(:vin, :manufacturer, :model,
+		:year, :color, :user_id)
+	end
 end
