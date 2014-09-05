@@ -40,3 +40,21 @@ cd car-market
 6. run `rake db:create db:migrate db:seed` to setup the SQLite database for development and test.
 <br>
 7. run `rails server` to launch the server on `http://localhost:3000`
+
+
+## Quickstart
+The routes of this REST API follow the convention.
+
+### Sign up
+`POST /api/v1/users`
+
+| Parameter                   | required | default  |
+| :-------------------------- | :------: | :------: |
+| user[nickname]              | true     | N/A      |
+| user[first_name]            | false    | ""       |
+| user[last_name]             | false    | ""       |
+| user[email]                 | true     | N/A      |
+| user[password]              | true     | N/A      |
+| user[password_confirmation] | true     | N/A      |
+| user[status]                | true     | "active" |
+
