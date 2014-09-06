@@ -48,7 +48,7 @@ The routes of this REST API follow the convention.
 ### Sign up
 `POST /api/v1/users`
 
-| Parameter                   | required | default  |
+| Parameters                  | required | default  |
 | :-------------------------- | :------: | :------: |
 | user[nickname]              | true     | N/A      |
 | user[first_name]            | false    | ""       |
@@ -62,9 +62,9 @@ The routes of this REST API follow the convention.
 ### Sign in
 `POST /api/v1/users/signin`
 
-| Parameter                   | required | default  |
+| Parameters                  | required | default  |
 | :-------------------------- | :------: | :------: |
 | user[email]                 | true     | N/A      |
 | user[password]              | true     | N/A      |
 
-You will get an `access_token` of your account once you have signed in.  The token will be needed for the rest of the API calls.
+You will get a `token` and `user_id` of your account once you have signed in.  The token will be needed for the rest of the API calls.
