@@ -110,3 +110,18 @@ This will randomly list 5 listings from the database.
 | :id                         | true     | N/A      |
 
 
+### Listing Create
+`POST /api/v1/listings`
+
+| Parameters           | required | default  |
+| :------------------- | :------: | :------: |
+| listing[user_id]     | true     | N/A      |
+| listing[vehicle_id]  | true     | N/A      |
+| listing[price]       | true     | N/A      |
+| listing[currency]    | true     | N/A      |
+| listing[status]      | true     | N/A      |
+| listing[city]        | true     | N/A      |
+| listing[state]       | true     | N/A      |
+| listing[country]     | true     | N/A      |
+| listing[zip_code]    | true     | N/A      |
+| listing[description] | true     | N/A      |
