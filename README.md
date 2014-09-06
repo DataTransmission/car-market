@@ -85,6 +85,7 @@ This will randomly list 5 vehicles from the database.
 
 
 ### Vehicle Create
+`POST /api/v1/vehicles`
 
 | Parameters                  | required | default  |
 | :-------------------------- | :------: | :------: |
