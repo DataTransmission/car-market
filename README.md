@@ -96,3 +96,17 @@ This will randomly list 5 vehicles from the database.
 | vehicle[color]              | false    | ""       |
 
 
+### Listing Index
+`GET /api/v1/listings`
+
+This will randomly list 5 listings from the database.
+
+
+### Listing Show
+`GET /api/v1/listings/{:id}`
+
+| Parameters                  | required | default  |
+| :-------------------------- | :------: | :------: |
+| :id                         | true     | N/A      |
+
+
