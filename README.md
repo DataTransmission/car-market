@@ -58,3 +58,13 @@ The routes of this REST API follow the convention.
 | user[password_confirmation] | true     | N/A      |
 | user[status]                | true     | "active" |
 
+
+### Sign in
+`POST /api/v1/users/signin`
+
+| Parameter                   | required | default  |
+| :-------------------------- | :------: | :------: |
+| user[email]                 | true     | N/A      |
+| user[password]              | true     | N/A      |
+
+You will get an `access_token` of your account once you have signed in.  The token will be needed for the rest of the API calls.
