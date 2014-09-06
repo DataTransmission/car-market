@@ -9,7 +9,7 @@ This repository contains the restful API for Car Market.  The Android and iOS wi
 <br><br>
 **Note**
 <br>
-1. For the sake of simplicity, I have deployed this API to heroku with SQLite to quickly test its functionalities.  You are free to setup your own server environment and use your preferred database system.
+1. For the sake of simplicity, I have deployed this API to Heroku with SQLite to quickly test its functionalities.  You can check it out on [here](http://car-market.herokuapp.com/api/v1/listings) with the [instruction](#quickstart).  You are also free to setup your own server environment and use your preferred database system.
 
 2. New routes and API calls will be added as more features are developed on the mobile apps.
 
