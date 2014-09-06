@@ -1,6 +1,7 @@
 class Api::V1::ListingsController < ApplicationController
 
   before_filter :fetch_listing, :except => [:index, :create]
+  before_action :api_authenticate, :except => [:index, :show]
 
   def index
     total = Listing.count
@@ -46,5 +47,16 @@ class Api::V1::ListingsController < ApplicationController
     hash[:vehicle] = listing.vehicle
 
     return hash
+  end
+
+  private
+  def api_authenticate
+    authenticate_or_request_with_http_token do |token, options|
+      if ApiKey.exists?(access_token: token)
+        ApiKey.find_by_access_token(token).user_id == params[:listing][:user_id].to_i
+      else
+        false
+      end
+    end
   end
 end
