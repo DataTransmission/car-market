@@ -25,6 +25,36 @@ class Api::V1::ListingsController < ApplicationController
     end
   end
 
+  def create
+    msg = Hash.new
+
+    @listing = Listing.new(create_listing_params)
+
+    if @listing.save
+      msg[:listing] = @listing
+      msg[:status] = 200
+      msg[:message] = ''
+    else
+
+      str = ""
+      errors = @listing.errors
+      for key in errors
+        for error in errors[key]
+          str += "#{key} #{error}" + "\n"
+        end
+      end
+
+      msg[:status] = 422
+      msg[:message] = str[0..-2]
+
+    end
+
+
+    respond_to do |format|
+      format.json { render json: msg }
+    end
+  end
+
   private
   def fetch_listing
     @listing = Listing.find_by_id(params[:id])
