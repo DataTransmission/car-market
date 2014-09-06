@@ -31,6 +31,15 @@ class Api::V1::ListingsController < ApplicationController
   end
 
   private
+  def create_listing_params
+    params
+    .require(:listing)
+    .permit(:user_id, :vehicle_id, :price,
+    :currency, :status, :city, :state, :country,
+    :zip_code, :description)
+  end
+
+  private
   def filter_listing(listing)
     hash = Hash.new()
     hash[:id] = listing.id
