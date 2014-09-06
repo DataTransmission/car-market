@@ -68,3 +68,31 @@ The routes of this REST API follow the convention.
 | user[password]              | true     | N/A      |
 
 You will get a `token` and `user_id` of your account once you have signed in.  The token will be needed for the rest of the API calls.
+
+
+### Vehicle Index
+`GET /api/v1/vehicles`
+
+This will randomly list 5 vehicles from the database.
+
+
+### Vehicle Show
+`GET /api/v1/vehicles/{:id}`
+
+| Parameters                  | required | default  |
+| :-------------------------- | :------: | :------: |
+| :id                         | true     | N/A      |
+
+
+### Vehicle Create
+
+| Parameters                  | required | default  |
+| :-------------------------- | :------: | :------: |
+| vehicle[vin]                | true     | N/A      |
+| vehicle[user_id]            | true     | N/A      |
+| vehicle[manufacturer]       | false    | ""       |
+| vehicle[model]              | false    | ""       |
+| vehicle[year]               | false    | ""       |
+| vehicle[color]              | false    | ""       |
+
+
