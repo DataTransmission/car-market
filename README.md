@@ -62,10 +62,10 @@ The routes of this REST API follow the convention.
 ### Sign in
 `POST /api/v1/users/signin`
 
-| Parameters                  | required | default  |
-| :-------------------------- | :------: | :------: |
-| user[email]                 | true     | N/A      |
-| user[password]              | true     | N/A      |
+| Parameters     | required | default  |
+| :------------- | :------: | :------: |
+| user[email]    | true     | N/A      |
+| user[password] | true     | N/A      |
 
 You will get a `token` and `user_id` of your account once you have signed in.  The token will be needed for the rest of the API calls.
 
@@ -79,22 +79,22 @@ This will randomly list 5 vehicles from the database.
 ### Vehicle Show
 `GET /api/v1/vehicles/{:id}`
 
-| Parameters                  | required | default  |
-| :-------------------------- | :------: | :------: |
-| :id                         | true     | N/A      |
+| Parameters | required | default  |
+| :--------- | :------: | :------: |
+| :id        | true     | N/A      |
 
 
 ### Vehicle Create
 `POST /api/v1/vehicles`
 
-| Parameters                  | required | default  |
-| :-------------------------- | :------: | :------: |
-| vehicle[vin]                | true     | N/A      |
-| vehicle[user_id]            | true     | N/A      |
-| vehicle[manufacturer]       | false    | ""       |
-| vehicle[model]              | false    | ""       |
-| vehicle[year]               | false    | ""       |
-| vehicle[color]              | false    | ""       |
+| Parameters            | required | default  |
+| :-------------------- | :------: | :------: |
+| vehicle[vin]          | true     | N/A      |
+| vehicle[user_id]      | true     | N/A      |
+| vehicle[manufacturer] | false    | ""       |
+| vehicle[model]        | false    | ""       |
+| vehicle[year]         | false    | ""       |
+| vehicle[color]        | false    | ""       |
 
 
 ### Listing Index
@@ -106,9 +106,9 @@ This will randomly list 5 listings from the database.
 ### Listing Show
 `GET /api/v1/listings/{:id}`
 
-| Parameters                  | required | default  |
-| :-------------------------- | :------: | :------: |
-| :id                         | true     | N/A      |
+| Parameters | required | default  |
+| :--------- | :------: | :------: |
+| :id        | true     | N/A      |
 
 
 ### Listing Create
