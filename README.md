@@ -69,6 +69,8 @@ The routes of this REST API follow the convention.
 
 You will get a `token` and `user_id` of your account once you have signed in.  The token will be needed for the rest of the API calls.
 
+You will need to put "Token `token`" as `Authorization` field in the header of your other calls.  Please make sure that you wrap your API calls with secure connections, a.k.a using `https`.
+
 
 ### Vehicle Index
 `GET /api/v1/vehicles`
